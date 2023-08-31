@@ -1,0 +1,55 @@
+@{
+    ViewData["Title"] = "Add Character";
+}
+
+@model MovieApp.Models.Character
+
+<div>
+    <h1 class="display-6">Add Character</h1>
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <form asp-action="Store" asp-controller="Character">
+        <div class="form-group mb-3">
+            <label asp-for="ActorID"></label>
+            <select asp-for="ActorID" class="form-control">
+                @foreach (var actor in ViewBag.Actors)
+                {
+                    <option value="@actor.ID">@actor.Name</option>
+                }
+            </select>
+            <span asp-validation-for="ActorID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="MovieID"></label>
+            <select asp-for="MovieID" class="form-control">
+                @foreach (var movie in ViewBag.Movies)
+                {
+                    <option value="@movie.ID">@movie.Title</option>
+                }
+            </select>
+            <span asp-validation-for="MovieID" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="CharacterName"></label>
+            <input asp-for="CharacterName" class="form-control"></input>
+            <span asp-validation-for="CharacterName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Pay"></label>
+            <input asp-for="Pay" class="form-control" type="number" min="0"></input>
+            <span asp-validation-for="Pay" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Screentime"></label>
+            <input asp-for="Screentime" class="form-control" type="number" min="0"></input>
+            <span asp-validation-for="Screentime" class="text-danger"></span>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full">Submit</button>
+    </form>
+</div>

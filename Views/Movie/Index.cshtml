@@ -1,0 +1,49 @@
+@{
+    ViewData["Title"] = "Movie List";
+}
+
+@model List<MovieApp.Models.Movie>
+
+<div>
+    <div class="d-flex justify-content-between align-items-center">
+        <h1 class="display-6">Movie List</h1>
+
+        <a asp-action="Create" asp-controller="Movie">Add Movie</a>
+    </div>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Rating</th>
+                <th scope="col">Genre</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model.Count() == 0){
+                <tr>
+                    <td colspan="100">
+                        <p class="text-center text-sm text-secondary">No movies found.</p>
+                    </td>
+                </tr>
+            }
+            @foreach(var movie in Model)
+            {
+                <tr>
+                    <th scope="row">@movie.ID</th>
+                    <td>@movie.Title</td>
+                    <td>@movie.Rating</td>
+                    <td>@movie.Genre</td>
+                    <td>
+                        <a asp-action="Edit" asp-controller="Movie" asp-route-id="@movie.ID">Edit</a>
+                        <form asp-action="Destroy" asp-controller="Movie" asp-route-id="@movie.ID" class="d-inline-block ms-2">
+                            <button type="submit" class="text-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

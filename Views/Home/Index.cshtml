@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    List<Movie> topFloppedMovies = ViewBag.TopFloppedMovies;
+}
+
+<h2>Top 5 Flopped Movies</h2>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Budget</th>
+            <th scope="col">Gross</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if(topFloppedMovies.Count() == 0){
+            <tr>
+                <td colspan="100">
+                    <p class="text-center text-sm text-secondary">No records found.</p>
+                </td>
+            </tr>
+        }
+        @foreach(var movie in topFloppedMovies)
+        {
+            <tr>
+                <th scope="row">@movie.ID</th>
+                <td>@movie.Title</td>
+                <td>@movie.Rating</td>
+                <td>@movie.Budget</td>
+                <td>@movie.Gross</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Movie" asp-route-id="@movie.ID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<hr>
+
+<h2>Top 5 paid actors</h2>
+<table class="table table-bordered mt-3">
+    <thead>
+        <tr>
+            <th scope="col">Actor ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Movie</th>
+            <th scope="col">Character</th>
+            <th scope="col">Pay</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in ViewBag.TopPaidCharacters)
+        {
+            <tr>
+                <td>@item.Actor.ID</td>
+                <td>@item.Actor.Name</td>
+                <td>@item.Movie.Title</td>
+                <td>@item.Character.CharacterName</td>
+                <td>@item.Character.Pay</td>
+                <td>
+                    <a asp-action="Edit" asp-controller="Actor" asp-route-id="@item.Actor.ID">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
