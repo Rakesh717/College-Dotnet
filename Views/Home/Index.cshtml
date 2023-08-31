@@ -53,6 +53,15 @@
         </tr>
     </thead>
     <tbody>
+        @if (ViewBag.TopPaidCharacters?.Count == 0)
+        {
+            <tr>
+                <td colspan="100">
+                    <p class="text-center text-sm text-secondary">No records found.</p>
+                </td>
+            </tr>
+        }
+
         @foreach(var item in ViewBag.TopPaidCharacters)
         {
             <tr>
